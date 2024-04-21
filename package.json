@@ -1,0 +1,17 @@
+{
+  "name": "easy-cabinet",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AuroraTeam/EasyCabinet.git"
+  },
+  "author": "AuroraTeam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AuroraTeam/EasyCabinet/issues"
+  },
+  "homepage": "https://github.com/AuroraTeam/EasyCabinet#readme"
+}
