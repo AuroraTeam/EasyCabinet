@@ -1,73 +1,49 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Установка баз данных
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Для работы вам нужно на сервер установить такие программы как:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [Valkey](https://github.com/valkey-io/valkey)
+- [Minio](https://min.io/)
+- [MySQL](https://www.mysql.com/)
 
-## Description
+К сожалению на Windows не получится запустить `Valkey` так что рекомендуем использовать для ваc Docker
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Настройка
 
-## Installation
+Переименуйте файл [.env.example](https://github.com/AuroraTeam/EasyCabinet/blob/master/packages/backend/.env.example) в `.env`.  
 
-```bash
-$ npm install
+В этом файле будут храниться ваши настройки:
+
+- `DEV` - Настройки под разработку в коде
+- `HOST` - IP который слушает сервер
+- `PORT` - Порт на котором работает сервер
+- `FRONTEND_URL` - Адрес `frontend` части
+- `COOKIE_DOMAIN` - На кокой домен будут созданы куки
+- `COOKIE_EXPIRES_IN` - Через сколько куки станут не действительные
+- `DB_HOST` - IP MySQL сервера
+- `DB_PORT` - Порт MySQL сервера
+- `DB_NAME` - База данных MySQL сервера
+- `DB_USER` - Имя пользователя MySQL сервера
+- `DB_PASS` - Пароль от пользователя MySQL сервера
+- `REDIS_URL` - Redis ссылка до Valkey сервера
+- `S3_ACCESS_KEY_ID` - Имя пользователя Minio сервера
+- `S3_SECRET_ACCESS_KEY` - Пароль от пользователя Minio сервера
+- `S3_ENDPOINT` - Адрес до Minio сервера (внутренний)
+- `S3_REGION` - Имя сервера Minio (можно оставить без изменения)
+- `S3_BUCKET` - Название хранилища в Minio сервера
+- `S3_PUBLIC_URL` - Адрес до Minio сервера (внешний)
+
+# Запуск 
+
+Собираем проект и запускаем сервер.
+```
+npm run build
+
+npm run start:prod
 ```
 
-## Running the app
+Для разработки можно запустить сервер в соответственном режиме.
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:debug
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
