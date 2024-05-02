@@ -2,11 +2,45 @@
 
 Для работы вам нужно на сервер установить такие программы как:
 
-- [Valkey](https://github.com/valkey-io/valkey)
-- [Minio](https://min.io/)
+- [KeyDB](https://docs.keydb.dev)
+- [MinIO](https://min.io/)
 - [MySQL](https://www.mysql.com/)
 
-К сожалению на Windows не получится запустить `Valkey` так что рекомендуем использовать для ваc Docker
+К сожалению на Windows не получится запустить `KeyDB` так что рекомендуем использовать для ваc Docker
+
+## Настройка KeyDB 
+
+Его не нужно настраивать достаточно просто установить.
+
+## Настройка MinIO
+
+Заходим на админ панель по адресу `http://localhost:9001` и авторизуемся под аккаунтом по умолчанию (логин и пароль `minioadmin`).  
+Переходим во вкладку `Buckets` и создаём хранилище. `Access Policy` у хранилище должно быть `Custom` с такими настройками:
+```json
+"Statement": [
+    {
+        "Effect": "Allow",
+        "Principal": {
+            "AWS": [
+                "*"
+            ]
+        },
+        "Action": [
+            "s3:GetObject"
+        ],
+        "Resource": [
+            "arn:aws:s3:::НАЗВАНИЕ_ХРАНИЛИЩЕ/*"
+        ]
+    }
+]
+```
+
+## Настройка MySQL 
+
+Нужно создать базу данных:
+```sql
+CREATE DATABASE `НАЗВАНИЕ_БАЗЫ`
+```
 
 # Настройка
 
@@ -25,7 +59,7 @@
 - `DB_NAME` - База данных MySQL сервера
 - `DB_USER` - Имя пользователя MySQL сервера
 - `DB_PASS` - Пароль от пользователя MySQL сервера
-- `REDIS_URL` - Redis ссылка до Valkey сервера
+- `REDIS_URL` - Redis ссылка до KeyDB сервера
 - `S3_ACCESS_KEY_ID` - Имя пользователя Minio сервера
 - `S3_SECRET_ACCESS_KEY` - Пароль от пользователя Minio сервера
 - `S3_ENDPOINT` - Адрес до Minio сервера (внутренний)
