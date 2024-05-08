@@ -30,7 +30,7 @@
                 "s3:GetObject"
             ],
             "Resource": [
-                "arn:aws:s3:::mine/"
+                "arn:aws:s3:::НАЗВАНИЕ_ХРАНИЛИЩЕ/"
             ]
         }
     ]
