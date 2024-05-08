@@ -14,25 +14,26 @@
 
 ## Настройка MinIO
 
-Заходим на админ панель по адресу `http://localhost:9001` и авторизуемся под аккаунтом по умолчанию (логин и пароль `minioadmin`).  
+Заходим на админ панель по адресу `http://localhost:9001` и авторизуемся под аккаунтом по умолчанию (логин `admin`, пароль `password`).  
 Переходим во вкладку `Buckets` и создаём хранилище. `Access Policy` у хранилище должно быть `Custom` с такими настройками:
 ```json
-"Statement": [
-    {
-        "Effect": "Allow",
-        "Principal": {
-            "AWS": [
-                "*"
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    ""
+                ]
+            },
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::НАЗВАНИЕ_ХРАНИЛИЩЕ/"
             ]
-        },
-        "Action": [
-            "s3:GetObject"
-        ],
-        "Resource": [
-            "arn:aws:s3:::НАЗВАНИЕ_ХРАНИЛИЩЕ/*"
-        ]
-    }
-]
+        }
+    ]
 ```
 
 ## Настройка MySQL 
