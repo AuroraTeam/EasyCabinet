@@ -27,18 +27,26 @@ export default function Login() {
       <div className="bg-neutral-800 p-8 rounded">
         <h1 className="text-3xl mb-4 text-center">Вход</h1>
         <form className="flex flex-col gap-4" onSubmit={submit}>
-          <input
-            type="text"
-            name="login"
-            placeholder="Логин"
-            className="border border-neutral-700 rounded p-2 bg-neutral-800 text-white"
-          />
-          <input
+        <div class="relative">
+          <i class='text-3xl bx bx-user absolute left-2 top-1/2 transform -translate-y-1/2'></i>
+            <input
+              type="text"
+              name="login"
+              placeholder="Логин"
+              className="border border-neutral-700 rounded p-2 pl-10 bg-neutral-800 text-white"
+            />
+          </div>
+          
+          <div className="relative">
+           <i class='text-3xl bx bx-lock-alt absolute left-2 top-1/2 transform -translate-y-1/2'></i>
+            <input
             type="password"
             name="password"
             placeholder="Пароль"
-            className="border border-neutral-700 rounded p-2 bg-neutral-800 text-white"
-          />
+            className="border border-neutral-700 rounded p-2 pl-10 bg-neutral-800 text-white"
+           />
+         </div>
+         
           <button className="bg-neutral-700 text-white rounded p-2 hover:bg-neutral-600">
             Войти
           </button>

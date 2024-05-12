@@ -23,7 +23,7 @@
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
-                    ""
+                    "*"
                 ]
             },
             "Action": [

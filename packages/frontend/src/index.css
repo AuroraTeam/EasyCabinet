@@ -37,10 +37,19 @@ body {
   min-height: 100vh;
 }
 
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
 }
+
+::selection{
+  color: #22c55e;
+  background-color: #eee;
+}
+
+
 
 /* button {
   border-radius: 8px;
