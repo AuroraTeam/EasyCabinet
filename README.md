@@ -13,7 +13,7 @@ npm i
 
 Далее пройдите отдельно настройку и установку [frontend](https://github.com/AuroraTeam/EasyCabinet/tree/master/packages/frontend) и [backend](https://github.com/AuroraTeam/EasyCabinet/tree/master/packages/backend).
 
-## Привязав к лаунчеру
+## Привязка к лаунчеру
 
 Для привязки нужно только изменить конфигурацию LaunchServer на:
 
@@ -30,7 +30,7 @@ auth:
 injector:
 {
     skinDomains: [
-        "ДОМЕН_BACKEND_СЕРВЕРА"
+        "ДОМЕН_S3_СЕРВЕРА"
     ]
 }
 ```
