@@ -55,7 +55,7 @@ CREATE DATABASE `НАЗВАНИЕ_БАЗЫ`
 - `HOST` - IP который слушает сервер
 - `PORT` - Порт на котором работает сервер
 - `FRONTEND_URL` - Адрес `frontend` части
-- `COOKIE_DOMAIN` - На кокой домен будут созданы куки
+- `COOKIE_DOMAIN` - На какой домен будут созданы куки
 - `COOKIE_EXPIRES_IN` - Через сколько куки станут не действительные
 - `DB_HOST` - IP MySQL сервера
 - `DB_PORT` - Порт MySQL сервера
