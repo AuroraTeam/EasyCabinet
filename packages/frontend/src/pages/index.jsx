@@ -10,7 +10,7 @@ export default function Index() {
       <h2 className="mt-4 text-2xl text-center text-green-100">
         Скачать лаунчер:
       </h2>
-      <div className="mt-4 flex gap-4 items-center justify-center text-center">
+      <div className="mt-4 flex flex-wrap gap-4 items-center justify-center text-center">
         <a
           className="bg-neutral-700 hover:shadow-xl hover:shadow-neutral-900 hover:bg-neutral-600 hover:text-green-100 rounded-md px-4 py-2"
           download
