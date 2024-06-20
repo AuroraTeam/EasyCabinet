@@ -20,8 +20,16 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: var(--primary-hover-color);
+@media (hover: hover){
+  a:hover {
+    color: var(--primary-hover-color);
+  }
+}
+
+@media(hover: none){
+  a:active{
+    color: var(--primary-hover-color);
+  }
 }
 
 body {
