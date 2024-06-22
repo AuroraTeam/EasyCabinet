@@ -12,7 +12,7 @@ export default function Index() {
       </h2>
       <div className="mt-4 flex flex-wrap gap-4 items-center justify-center text-center">
         <a
-          className="bg-neutral-700 hover:shadow-xl hover:shadow-neutral-900 hover:bg-neutral-600 hover:text-green-100 rounded-md px-4 py-2"
+          className="bg-neutral-700 rounded-md px-4 py-2 download"
           download
           href="#"
         >
@@ -20,7 +20,7 @@ export default function Index() {
           Windows
         </a>
         <a
-          className="bg-neutral-700 hover:shadow-xl hover:shadow-neutral-900 hover:bg-neutral-600 hover:text-green-100 rounded-md px-4 py-2"
+          className="bg-neutral-700 rounded-md px-4 py-2 download"
           download
           href="#"
         >
@@ -28,7 +28,7 @@ export default function Index() {
           Linux
         </a>
         <a
-          className="bg-neutral-700 hover:shadow-xl hover:shadow-neutral-900 hover:bg-neutral-600 hover:text-green-100 rounded-md px-4 py-2"
+          className="bg-neutral-700 rounded-md px-4 py-2 download"
           download
           href="#"
         >
