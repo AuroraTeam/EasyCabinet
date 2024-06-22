@@ -5,6 +5,7 @@
 :root {
   --primary-color: #22c55e;
   --primary-hover-color: #15803d;
+  --primary-hover-color-button: #525252;
 }
 
 @media (prefers-color-scheme: light) {
@@ -20,8 +21,38 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: var(--primary-hover-color);
+@media (hover: hover){
+  a:hover {
+    color: var(--primary-hover-color);
+  }
+  .download:hover {
+    background-color: var(--primary-hover-color-button);
+    color: #E7FCDC;
+  }
+  .auth-button:hover{
+    background-color: var(--primary-hover-color-button);
+  }
+  .save-button:hover {
+    background-color: #1E40AF;
+    border-color: #1E3A8A;
+  }
+}
+
+@media(hover: none){
+  a:active{
+    color: var(--primary-hover-color);
+  }
+  .download:active {
+    background-color: var(--primary-hover-color-button);
+    color: #E7FCDC;
+  }
+  .auth-button:active{
+    background-color: var(--primary-hover-color-button);
+  }
+  .save-button:active {
+    background-color: #1E40AF;
+    border-color: #1E3A8A;
+  }
 }
 
 body {
