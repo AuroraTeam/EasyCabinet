@@ -4,7 +4,7 @@ import { failure } from "../services";
 import { authMiddleware, editProfile, profile } from "../api";
 
 export default function Profile() {
-  // authMiddleware();
+  authMiddleware();
   const [skinType, setSkinType] = createSignal(false);
 
   let skinCanvas;
