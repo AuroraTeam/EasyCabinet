@@ -81,7 +81,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex mt-6 p-6 bg-neutral-800 roundedcle profile">
+    <div className="flex mt-6 p-6 bg-neutral-800 rounded profile">
       <div>
         <canvas
           ref={skinCanvas}
