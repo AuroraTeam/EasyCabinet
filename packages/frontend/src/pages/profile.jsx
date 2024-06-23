@@ -4,7 +4,7 @@ import { failure } from "../services";
 import { authMiddleware, editProfile, profile } from "../api";
 
 export default function Profile() {
-  authMiddleware();
+  // authMiddleware();
   const [skinType, setSkinType] = createSignal(false);
 
   let skinCanvas;
@@ -81,7 +81,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex mt-6 p-6 bg-neutral-800 roundedcle">
+    <div className="flex mt-6 p-6 bg-neutral-800 roundedcle profile">
       <div>
         <canvas
           ref={skinCanvas}
@@ -164,12 +164,12 @@ export default function Profile() {
         />
         <label
           htmlFor="cape"
-          className="inline-block px-4 py-2 border border-neutral-600 rounded-lg hover:bg-neutral-800 cursor-pointer"
+          className="inline-block px-4 py-2 border border-neutral-600 rounded-lg hover:bg-neutral-800 cursor-pointer mt-2 mr-3"
         >
           Загрузить плащ
         </label>
         <br />
-        <button className="px-4 py-2 mt-6 border bg-blue-600 border-blue-700 rounded-lg hover:bg-blue-800 hover:border-blue-900 save-button">
+        <button className="px-4 py-2 mt-6 border bg-blue-600 border-blue-700 rounded-lg save-button mr-3">
           Сохранить изменения
         </button>
       </form>

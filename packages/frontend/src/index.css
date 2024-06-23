@@ -55,6 +55,14 @@ a {
   }
 }
 
+@media only screen and (max-width: 550px){
+  .profile{
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 body {
   font-family: Inter, sans-serif;
   line-height: 1.5;
