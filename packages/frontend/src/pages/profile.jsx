@@ -81,7 +81,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex mt-6 p-6 bg-neutral-800 rounded profile">
+    <div className="flex mt-6 p-6 bg-neutral-800 rounded sm:flex-wrap sm:justify-center sm:text-center">
       <div>
         <canvas
           ref={skinCanvas}
@@ -169,7 +169,7 @@ export default function Profile() {
           Загрузить плащ
         </label>
         <br />
-        <button className="px-4 py-2 mt-6 border bg-blue-600 border-blue-700 rounded-lg save-button mr-3">
+        <button className="px-4 py-2 mt-6 border bg-blue-600 border-blue-700 rounded-lg mr-3 yes-hover:hover:bg-blue-800 yes-hover:hover:border-blue-900 no-hover:active:bg-blue-800 no-hover:active:border-blue-900">
           Сохранить изменения
         </button>
       </form>

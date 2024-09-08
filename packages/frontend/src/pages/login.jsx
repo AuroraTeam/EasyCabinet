@@ -39,7 +39,7 @@ export default function Login() {
             placeholder="Пароль"
             className="border border-neutral-700 rounded p-2 bg-neutral-800 text-white"
           />
-          <button className="bg-neutral-700 text-white rounded p-2 auth-button">
+          <button className="bg-neutral-700 text-white rounded p-2 yes-hover:hover:bg-neutral-600 no-hover:active:bg-neutral-600">
             Войти
           </button>
         </form>
