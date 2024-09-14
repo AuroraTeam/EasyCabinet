@@ -10,31 +10,26 @@ FROM base AS runner
 WORKDIR /app
 COPY --from=build /build/dist ./dist
 COPY --from=build /build/node_modules ./node_modules
-ENV DEV=true
-ENV HOST="0.0.0.0"
-ENV PORT=4000
-ENV FRONTEND_URL="http://localhost:8080"
-
-ENV JWT_SECRET="secret"
-ENV JWT_EXPIRES_IN="30m"
- 
-ENV COOKIE_SECURE=false
-ENV COOKIE_SECRET="secret"
-ENV COOKIE_DOMAIN="localhost"
-ENV COOKIE_EXPIRES_IN=2592000
- 
-ENV DB_HOST="mysql"
-ENV DB_PORT=3306
-ENV DB_NAME="mine"
-ENV DB_USER="mine"
-ENV DB_PASS="mine"
- 
-ENV REDIS_URL="redis://keydb:6379"
- 
-ENV S3_ACCESS_KEY_ID="minio"
-ENV S3_SECRET_ACCESS_KEY="miniosecret"
-ENV S3_ENDPOINT="http://minio:9000"
-ENV S3_REGION="test"
-ENV S3_BUCKET="mine"
-ENV S3_PUBLIC_URL="http://localhost:8080/object/mine/[hash]"
+ENV DEV=true \
+    HOST="0.0.0.0" \
+    PORT=4000 \
+    FRONTEND_URL="${PROTOCOL}://${DOMEN}:${WEB_PORT}" \
+    JWT_SECRET="secret" \
+    JWT_EXPIRES_IN="30m" \
+    COOKIE_SECURE=false \
+    COOKIE_SECRET="secret" \
+    COOKIE_DOMAIN="${DOMEN}" \
+    COOKIE_EXPIRES_IN=2592000 \
+    DB_HOST="mysql" \
+    DB_PORT=3306 \
+    DB_NAME="mine" \
+    DB_USER="mine" \
+    DB_PASS="mine" \
+    REDIS_URL="redis://keydb:6379" \
+    S3_ACCESS_KEY_ID="minio" \
+    S3_SECRET_ACCESS_KEY="miniosecret" \
+    S3_ENDPOINT="http://minio:9000" \
+    S3_REGION="not-used" \
+    S3_BUCKET="mine" \
+    S3_PUBLIC_URL="/object/mine/[hash]"
 CMD ["node", "./dist/main.js"]

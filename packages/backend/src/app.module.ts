@@ -47,6 +47,7 @@ import { User } from './users/user.entity';
           },
           region: configService.get('S3_REGION'),
           endpoint: configService.get('S3_ENDPOINT'),
+          forcePathStyle: true,
         },
       }),
       inject: [ConfigService],
