@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@solidjs/router": "^0.10.5",
+    "@solidjs/router": "^0.14.7",
     "axios": "^1.6.2",
     "notiflix": "^3.2.6",
     "skinview3d": "^3.0.1",
