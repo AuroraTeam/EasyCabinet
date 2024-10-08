@@ -12,7 +12,9 @@ export default function Index() {
       </h2>
       <div className="mt-4 flex flex-wrap gap-4 items-center justify-center text-center">
         <a
-          className="bg-neutral-700 rounded-md px-4 py-2 download"
+          className="bg-neutral-700 rounded-md px-4 py-2 
+            yes-hover:hover:shadow-xl yes-hover:hover:shadow-neutral-900 yes-hover:hover:bg-neutral-600 yes-hover:hover:text-green-100 
+            no-hover:active:shadow-xl no-hover:active:shadow-neutral-900 no-hover:active:bg-neutral-600 no-hover:active:text-green-100"
           download
           href="#"
         >
@@ -20,7 +22,9 @@ export default function Index() {
           Windows
         </a>
         <a
-          className="bg-neutral-700 rounded-md px-4 py-2 download"
+          className="bg-neutral-700 rounded-md px-4 py-2 
+            yes-hover:hover:shadow-xl yes-hover:hover:shadow-neutral-900 yes-hover:hover:bg-neutral-600 yes-hover:hover:text-green-100 
+            no-hover:active:shadow-xl no-hover:active:shadow-neutral-900 no-hover:active:bg-neutral-600 no-hover:active:text-green-100"
           download
           href="#"
         >
@@ -28,7 +32,9 @@ export default function Index() {
           Linux
         </a>
         <a
-          className="bg-neutral-700 rounded-md px-4 py-2 download"
+          className="bg-neutral-700 rounded-md px-4 py-2 
+            yes-hover:hover:shadow-xl yes-hover:hover:shadow-neutral-900 yes-hover:hover:bg-neutral-600 yes-hover:hover:text-green-100 
+            no-hover:active:shadow-xl no-hover:active:shadow-neutral-900 no-hover:active:bg-neutral-600 no-hover:active:text-green-100"
           download
           href="#"
         >

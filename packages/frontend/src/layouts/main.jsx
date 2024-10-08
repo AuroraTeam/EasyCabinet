@@ -12,9 +12,11 @@ export default function Main({ children }) {
   return (
     <>
       <header className="flex items-center justify-between py-3">
-        <a href="/">
-          <img src="/logo.png" className="w-12" alt="Logo" />
-        </a>
+        <nav className="ml-2">
+          <a href="/">
+            <img src="/logo.png" className="w-12" alt="Logo" />
+          </a>
+        </nav>
         {isAuthed() ? (
           <nav className="flex items-center gap-4 p-4">
             <a href="/profile">Профиль</a>

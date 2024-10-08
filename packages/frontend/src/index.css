@@ -25,41 +25,11 @@ a {
   a:hover {
     color: var(--primary-hover-color);
   }
-  .download:hover {
-    background-color: var(--primary-hover-color-button);
-    color: #E7FCDC;
-  }
-  .auth-button:hover{
-    background-color: var(--primary-hover-color-button);
-  }
-  .save-button:hover {
-    background-color: #1E40AF;
-    border-color: #1E3A8A;
-  }
 }
 
 @media(hover: none){
   a:active{
     color: var(--primary-hover-color);
-  }
-  .download:active {
-    background-color: var(--primary-hover-color-button);
-    color: #E7FCDC;
-  }
-  .auth-button:active{
-    background-color: var(--primary-hover-color-button);
-  }
-  .save-button:active {
-    background-color: #1E40AF;
-    border-color: #1E3A8A;
-  }
-}
-
-@media only screen and (max-width: 550px){
-  .profile{
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
   }
 }
 
