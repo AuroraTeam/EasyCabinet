@@ -52,3 +52,21 @@ injector:
     ]
 }
 ```
+Для автоматической установки конфигурация LaunchServer немного отличается:
+```hjson
+auth:
+{
+    type: json
+    authUrl: http://localhost:8080/api/aurora/auth
+    joinUrl: http://localhost:8080/api/aurora/join
+    hasJoinedUrl: http://localhost:8080/api/aurora/hasJoined
+    profileUrl: http://localhost:8080/api/aurora/profile
+    profilesUrl: http://localhost:8080/api/aurora/profiles
+},
+injector:
+{
+    skinDomains: [
+        "localhost"
+    ]
+}
+```
