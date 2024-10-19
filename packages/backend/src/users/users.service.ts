@@ -1,10 +1,11 @@
 import { createHash } from 'crypto';
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
 
 import { MemoryStorageFile } from '@blazity/nest-file-fastify';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { InjectS3, S3 } from 'nestjs-s3';
 import sharp from 'sharp';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
@@ -17,8 +18,6 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-    @InjectS3()
-    private readonly s3: S3,
     private readonly configService: ConfigService,
   ) {}
 
@@ -49,8 +48,8 @@ export class UsersService {
   public getSkinData({ isAlex, skinHash, capeHash }: User) {
     return {
       isAlex,
-      skinUrl: this.formatS3Url(skinHash),
-      capeUrl: this.formatS3Url(capeHash),
+      skinUrl: this.formatUrl(skinHash),
+      capeUrl: this.formatUrl(capeHash),
     };
   }
 
@@ -75,12 +74,11 @@ export class UsersService {
     return true;
   }
 
-  private formatS3Url(hash: string) {
+  private formatUrl(hash: string) {
     if (!hash) return;
 
-    return this.configService
-      .get<string>('S3_PUBLIC_URL')
-      .replace('[hash]', hash);
+    return new URL(`/files/${hash}`, this.configService
+      .get<string>('BACKND_URL'))
   }
 
   private async uploadImage(
@@ -96,14 +94,7 @@ export class UsersService {
     }
 
     const imageHash = this.generateHash(images[0].buffer);
-
-    await this.s3.putObject({
-      Bucket: this.configService.get('S3_BUCKET'),
-      Key: imageHash,
-      Body: images[0].buffer,
-      ContentType: 'image/png',
-    });
-
+    writeFile(join(__filename, '..', '..', 'files', imageHash), images[0].buffer).catch(console.error);
     return imageHash;
   }
 
