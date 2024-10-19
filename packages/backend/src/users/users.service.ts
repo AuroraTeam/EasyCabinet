@@ -78,7 +78,7 @@ export class UsersService {
     if (!hash) return;
 
     return new URL(`/files/${hash}`, this.configService
-      .get<string>('BACKND_URL'))
+      .get<string>('BACKEND_URL'))
   }
 
   private async uploadImage(
