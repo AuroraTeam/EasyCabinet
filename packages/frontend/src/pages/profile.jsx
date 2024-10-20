@@ -50,7 +50,7 @@ export default function Profile() {
 
   const loadCape = (e) => {
     loadImage(e, (img) =>
-      skinViewer.loadCape(img).catch((e) => failure(e.message))
+      skinViewer.loadCape(img).catch((e) => failure(e.message)),
     );
   };
 
@@ -63,7 +63,7 @@ export default function Profile() {
     reader.readAsDataURL(file);
   };
 
-  const changeSteveAlex = (e) => {
+  const changeSkinType = (e) => {
     skinViewer.playerObject.skin.modelType = e.target.checked
       ? "slim"
       : "default";
@@ -81,14 +81,14 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex mt-6 p-6 bg-neutral-800 rounded profile">
+    <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mt-6 p-6 bg-neutral-800 rounded profile">
       <div>
         <canvas
           ref={skinCanvas}
           className="rounded bg-neutral-700 bg-opacity-20"
         ></canvas>
         <div className="flex items-center justify-center">
-          <span className="text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">
+          <span className="text-sm font-medium text-neutral-900 dark:text-neutral-300 mr-2">
             Плащ
           </span>
           <label className="relative inline-flex items-center cursor-pointer my-2">
@@ -98,43 +98,49 @@ export default function Profile() {
               className="sr-only peer"
               onChange={changeCapeElytra}
             />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-neutral-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <div className="w-11 h-6 bg-neutral-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-neutral-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-neutral-600 peer-checked:bg-blue-600"></div>
+            <span className="ms-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
               Элитры
             </span>
           </label>
         </div>
       </div>
-      <form className="w-full ml-6" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <table className="mb-6 w-full">
           <tbody>
             <tr>
-              <td className="font-medium">Тип скина:</td>
+              <td className="font-medium w-24">Тип скина:</td>
               <td className="flex items-center">
-                <span className="text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">
-                  Steve
+                <span className="text-sm font-medium text-neutral-900 dark:text-neutral-300 mr-2">
+                  Default
                 </span>
                 <label className="relative inline-flex items-center cursor-pointer my-2">
                   <input
                     type="checkbox"
                     name="isAlex"
                     className="sr-only peer"
-                    onChange={changeSteveAlex}
+                    onChange={changeSkinType}
                     checked={skinType()}
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-neutral-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                  <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Alex
+                  <div className="w-11 h-6 bg-neutral-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-neutral-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-neutral-600 peer-checked:bg-blue-600"></div>
+                  <span className="ms-3 text-sm font-medium text-neutral-900 dark:text-neutral-300">
+                    Slim
                   </span>
                 </label>
               </td>
             </tr>
             <tr>
-              <td></td>
-              <td>
+              <td className="hidden md:table-cell"></td>
+              <td className="hidden md:table-cell">
                 <small className="text-neutral-500">
-                  Определяется автоматически, переключайте если определилось с
-                  ошибкой
+                  Определяется автоматически. Переключайте, если тип скина
+                  определился с ошибкой.
+                </small>
+              </td>
+              <td className="md:hidden" colSpan={2}>
+                <small className="text-neutral-500">
+                  Определяется автоматически. Переключайте, если тип скина
+                  определился с ошибкой.
                 </small>
               </td>
             </tr>
@@ -150,7 +156,7 @@ export default function Profile() {
         />
         <label
           htmlFor="skin"
-          className="inline-block px-4 py-2 border border-neutral-600 rounded-lg hover:bg-neutral-800 cursor-pointer mr-3"
+          className="inline-block px-4 py-2 border border-neutral-600 rounded-lg hover:bg-neutral-700 transition-colors cursor-pointer mr-3"
         >
           Загрузить скин
         </label>
@@ -164,12 +170,12 @@ export default function Profile() {
         />
         <label
           htmlFor="cape"
-          className="inline-block px-4 py-2 border border-neutral-600 rounded-lg hover:bg-neutral-800 cursor-pointer mt-2 mr-3"
+          className="inline-block px-4 py-2 border border-neutral-600 rounded-lg hover:bg-neutral-700 transition-colors cursor-pointer mt-2 mr-3"
         >
           Загрузить плащ
         </label>
         <br />
-        <button className="px-4 py-2 mt-6 border bg-blue-600 border-blue-700 rounded-lg save-button mr-3">
+        <button className="px-4 py-2 mt-6 border bg-blue-600 border-blue-700 hover:bg-blue-500 hover:border-blue-600 transition-colors rounded-lg save-button mr-3">
           Сохранить изменения
         </button>
       </form>

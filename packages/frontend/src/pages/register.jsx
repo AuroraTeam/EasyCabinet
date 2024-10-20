@@ -50,7 +50,7 @@ export default function Register() {
             placeholder="Повторите пароль"
             className="border border-neutral-700 rounded p-2 bg-neutral-800 text-white"
           />
-          <button className="bg-neutral-700 text-white rounded p-2 auth-button">
+          <button className="bg-neutral-700 hover:bg-neutral-600 text-white rounded p-2 auth-button">
             Зарегистрироваться
           </button>
         </form>
