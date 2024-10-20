@@ -7,6 +7,8 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { join } from 'path';
+import { existsSync, mkdirSync } from 'fs';
 
 import { AppModule } from './app.module';
 
@@ -15,6 +17,15 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+
+  if (!existsSync(join(__filename, '..', 'files'))) {
+    mkdirSync(join(__filename, '..', 'files'));
+  }
+
+  app.useStaticAssets({
+    root: join(__filename, '..', 'files'),
+    prefix:"/files/",
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

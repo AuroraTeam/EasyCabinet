@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { CacheModule } from '@nestjs/cache-manager';
 
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
@@ -13,6 +14,7 @@ import { JwtStrategy } from './jwt.strategy';
   imports: [
     UsersModule,
     ConfigModule,
+    CacheModule.register(),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({

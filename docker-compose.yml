@@ -21,29 +21,8 @@ services:
     networks:
       - aurora-network
     depends_on:
-      - keydb
       - mysql
-      - minio
     restart: always
-
-  minio:
-    image: bitnami/minio:latest
-    container_name: minio
-    environment:
-      - MINIO_DEFAULT_BUCKETS=mine:download
-      - MINIO_BROWSER=off
-    networks:
-      - aurora-network
-    #restart: always
-
-  keydb:
-    image: bitnami/keydb:latest
-    container_name: keydb
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    networks:
-      - aurora-network
-    #restart: always
 
   mysql:
     image: mysql:lts
