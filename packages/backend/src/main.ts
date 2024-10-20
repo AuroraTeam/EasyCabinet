@@ -1,3 +1,5 @@
+import { join } from 'path';
+
 import fastifyCookie from '@fastify/cookie';
 import fastifyMultipart from '@fastify/multipart';
 import { ValidationPipe } from '@nestjs/common';
@@ -7,8 +9,6 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { join } from 'path';
-import { existsSync, mkdirSync } from 'fs';
 
 import { AppModule } from './app.module';
 
@@ -18,13 +18,9 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
-  if (!existsSync(join(__filename, '..', 'files'))) {
-    mkdirSync(join(__filename, '..', 'files'));
-  }
-
   app.useStaticAssets({
-    root: join(__filename, '..', 'files'),
-    prefix:"/files/",
+    root: join(__dirname, '..', 'uploads'),
+    prefix: '/uploads/',
   });
 
   app.useGlobalPipes(

@@ -1,6 +1,7 @@
-# compiled output
+# project files
 /dist
 /node_modules
+/sessions
 
 # Logs
 logs
