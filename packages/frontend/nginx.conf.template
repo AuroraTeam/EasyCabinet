@@ -15,10 +15,6 @@ server {
     location /api/ {
         proxy_pass http://easycabinet-backend:4000/;
     }
-
-    location /object/ {
-        proxy_pass http://minio:9000/;
-    }
     
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
