@@ -25,5 +25,5 @@ ENV DEV=true \
     DB_PORT=3306 \
     DB_NAME="mine" \
     DB_USER="mine" \
-    DB_PASS="mine" \
+    DB_PASS="mine"
 CMD ["node", "./dist/main.js"]
