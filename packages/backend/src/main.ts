@@ -41,8 +41,8 @@ async function bootstrap() {
     credentials: true,
   });
 
-  await app.register(fastifyMultipart);
-  await app.register(fastifyCookie, { secret });
+  await app.register(<any>fastifyMultipart);
+  await app.register(<any>fastifyCookie, { secret });
   await app.listen(port, host);
 }
 bootstrap();
