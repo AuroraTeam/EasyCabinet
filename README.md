@@ -48,7 +48,7 @@ auth:
 injector:
 {
     skinDomains: [
-        "ДОМЕН_S3_СЕРВЕРА"
+        "ДОМЕН_BACKEND_СЕРВЕРА"
     ]
 }
 ```
