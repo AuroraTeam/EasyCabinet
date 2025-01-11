@@ -34,7 +34,7 @@
     "@nestjs/mapped-types": "^2.0.4",
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-fastify": "^10.2.10",
-    "@nestjs/typeorm": "^10.0.1",
+    "@prisma/client": "^6.2.1",
     "@react-email/components": "0.0.32",
     "@react-email/render": "1.0.4",
     "@webtre/nestjs-mailer-react-adapter": "^0.2.3",
@@ -43,7 +43,6 @@
     "cache-manager-fs-hash": "^2.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "mysql2": "^3.9.8",
     "nodemailer": "^6.9.16",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
@@ -51,8 +50,7 @@
     "react-dom": "19.0.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.2.0",
-    "sharp": "^0.33.2",
-    "typeorm": "^0.3.17"
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.2.1",
@@ -77,6 +75,7 @@
     "nodemon": "^3.0.2",
     "prettier": "^3.1.1",
     "prettier-plugin-import-sort": "^0.0.7",
+    "prisma": "^6.2.1",
     "react-email": "3.0.5",
     "source-map-support": "^0.5.20",
     "supertest": "^7.0.0",

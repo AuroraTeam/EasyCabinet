@@ -1,7 +1,6 @@
 import { randomUUID } from 'crypto';
 
 import { Injectable } from '@nestjs/common';
-import { In } from 'typeorm';
 
 import { AuthService } from '../auth/auth.service';
 import { UsersService } from '../users/users.service';
@@ -71,7 +70,7 @@ export class AuroraService {
 
   public async profiles(body: ProfilesDto) {
     const users = await this.usersService.findUsers({
-      login: In(body.usernames),
+      login: {in: body.usernames},
     });
 
     return users.map((user) => ({

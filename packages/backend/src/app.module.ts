@@ -3,32 +3,16 @@ import { join } from 'path';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReactAdapter } from '@webtre/nestjs-mailer-react-adapter';
 
 import { AppController } from './app.controller';
 import { AuroraModule } from './aurora/aurora.module';
 import { IgnoreCorsMiddleware } from './aurora/cors.middleware';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/user.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get('DB_HOST'),
-        port: +configService.get('DB_PORT'),
-        username: configService.get('DB_USER'),
-        password: configService.get('DB_PASS'),
-        database: configService.get('DB_NAME'),
-        entities: [User],
-        synchronize: configService.get('DEV') === 'true',
-      }),
-      inject: [ConfigService],
-    }),
     AuthModule,
     AuroraModule,
     MailerModule.forRootAsync({

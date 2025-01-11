@@ -5,41 +5,54 @@ import { join } from 'path';
 import { MemoryStorageFile } from '@blazity/nest-file-fastify';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { InjectRepository } from '@nestjs/typeorm';
 import sharp from 'sharp';
-import { FindOptionsWhere, Repository } from 'typeorm';
 
 import { JwtPayload } from '../auth/jwt.strategy';
 import { ProfileDto } from './dto/profile.dto';
-import { User } from './user.entity';
+import { PrismaService } from './prisma.service';
+import { User, Prisma } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
   ) {}
 
-  public findUser(where: FindOptionsWhere<User> | FindOptionsWhere<User>[]) {
-    return this.usersRepository.findOneBy(where);
+  public async findUser(where: Prisma.UserWhereUniqueInput) {
+    return this.prisma.user.findUnique({
+      where,
+    });
   }
-
-  public findUsers(where: FindOptionsWhere<User> | FindOptionsWhere<User>[]) {
-    return this.usersRepository.findBy(where);
+  
+  public async findUsers(where: Prisma.UserWhereInput) {
+    return this.prisma.user.findMany({
+      where,
+    });
   }
-
+  
   public async checkIfUserExists({ email }: Pick<User, 'email'>) {
-    return !!(await this.usersRepository.countBy([{ email }]));
+    const count = await this.prisma.user.count({
+      where: { email },
+    });
+    return count > 0;
   }
-
-  public createUser(user: Partial<User>) {
-    return this.usersRepository.insert(user);
+  
+  public async createUser(user: Prisma.UserCreateInput) {
+    return this.prisma.user.create({
+      data: user,
+    });
   }
-
-  public updateUser(criteria: Partial<User>, user: Partial<User>) {
-    return this.usersRepository.update(criteria, user);
-  }
+  
+  public async updateUser(
+    criteria: Prisma.UserWhereUniqueInput,
+    user: Prisma.UserUpdateInput
+  ) {
+    return this.prisma.user.update({
+      where: criteria,
+      data: user,
+    });
+  }  
 
   public async getProfile({ uuid }: JwtPayload) {
     return this.getSkinData(await this.findUser({ uuid }));
