@@ -11,7 +11,10 @@ import {
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto/auth.dto';
+import { ChangePasswordDto } from './dto/changePassword.dto';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import { ResetPasswordDto } from './dto/resetPassword.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -20,7 +23,7 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(
-    @Body() { login, password }: AuthDto,
+    @Body() { login, password }: LoginDto,
     @Res({ passthrough: true }) response: FastifyReply,
   ) {
     const { accessToken, refreshToken } = await this.authService.login(
@@ -33,8 +36,18 @@ export class AuthController {
   }
 
   @Post('register')
-  register(@Body() data: AuthDto) {
+  register(@Body() data: RegisterDto) {
     return this.authService.register(data);
+  }
+
+  @Post('reset-password')
+  resetPassword(@Body() { email }: ResetPasswordDto) {
+    return this.authService.resetPassword(email);
+  }
+
+  @Post('change-password')
+  changePassword(@Body() { resetToken, password }: ChangePasswordDto) {
+    return this.authService.changePassword(resetToken, password);
   }
 
   @Post('logout')

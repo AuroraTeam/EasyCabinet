@@ -9,10 +9,16 @@ export class User {
   uuid: string;
 
   @Column({ unique: true })
+  email: string;
+
+  @Column({ unique: true })
   login: string;
 
-  @Column()
+  @Column({ length: 60 })
   password: string;
+
+  @Column({ nullable: true, length: 32 })
+  resetToken: string;
 
   @Column({ nullable: true })
   accessToken: string;

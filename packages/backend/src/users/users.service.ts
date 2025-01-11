@@ -29,8 +29,8 @@ export class UsersService {
     return this.usersRepository.findBy(where);
   }
 
-  public async checkIfUserExists({ login }: Pick<User, 'login'>) {
-    return !!(await this.usersRepository.countBy([{ login }]));
+  public async checkIfUserExists({ email }: Pick<User, 'email'>) {
+    return !!(await this.usersRepository.countBy([{ email }]));
   }
 
   public createUser(user: Partial<User>) {

@@ -1,8 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class AuthDto {
+export class ChangePasswordDto {
   @IsNotEmpty()
-  login: string;
+  resetToken: string;
 
   @IsNotEmpty()
   password: string;

@@ -5,11 +5,8 @@
 body {
   font-family: Inter, sans-serif;
   font-weight: 300;
-
   color: #fff;
   background-color: #222;
-
-  min-width: 375px;
   min-height: 100vh;
 }
 

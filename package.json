@@ -13,5 +13,10 @@
   "bugs": {
     "url": "https://github.com/AuroraTeam/EasyCabinet/issues"
   },
-  "homepage": "https://github.com/AuroraTeam/EasyCabinet#readme"
+  "homepage": "https://github.com/AuroraTeam/EasyCabinet#readme",
+  "overrides": {
+    "@nestjs-modules/mailer": {
+      "mjml": "^5.0.0-alpha.4"
+    }
+  }
 }

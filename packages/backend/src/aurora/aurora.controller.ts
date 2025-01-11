@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UseFilters } from '@nestjs/common';
+import { LoginDto } from 'src/auth/dto/login.dto';
 
-import { AuthDto } from '../auth/dto/auth.dto';
 import { AuroraService } from './aurora.service';
 import { HasJoinedDto } from './dto/hasJoined.dto';
 import { JoinDto } from './dto/join.dto';
@@ -14,7 +14,7 @@ export class AuroraController {
   constructor(private readonly auroraService: AuroraService) {}
 
   @Post('auth')
-  async auth(@Body() { login, password }: AuthDto) {
+  async auth(@Body() { login, password }: LoginDto) {
     return this.returnResult(await this.auroraService.auth(login, password));
   }
 

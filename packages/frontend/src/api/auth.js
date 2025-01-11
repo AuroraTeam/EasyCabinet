@@ -7,12 +7,41 @@ const [isAuthed, setIsAuthed] = createSignal(false);
 
 export { isAuthed, isLoaded };
 
-export async function register(login, password) {
+export async function register(email, login, password) {
   try {
     await axios.post("auth/register", {
+      email,
       login,
       password,
     });
+  } catch (error) {
+    if (error.response?.data.message) {
+      failure(error.response.data.message);
+    } else {
+      failure("Неизвестная ошибка");
+    }
+    return false;
+  }
+  return true;
+}
+
+export async function resetPassword(email) {
+  try {
+    await axios.post("auth/reset-password", { email });
+  } catch (error) {
+    if (error.response?.data.message) {
+      failure(error.response.data.message);
+    } else {
+      failure("Неизвестная ошибка");
+    }
+    return false;
+  }
+  return true;
+}
+
+export async function changePassword(resetToken, password) {
+  try {
+    await axios.post("auth/change-password", { resetToken, password });
   } catch (error) {
     if (error.response?.data.message) {
       failure(error.response.data.message);
@@ -29,7 +58,7 @@ export async function login(login, password) {
     const { data } = await axios.post(
       "auth/login",
       { login, password },
-      { withCredentials: true }
+      { withCredentials: true },
     );
     setBearerToken(data.accessToken);
     setIsAuthed(true);

@@ -1,5 +1,6 @@
-import { randomUUID } from 'crypto';
+import { randomBytes, randomUUID } from 'crypto';
 
+import { MailerService } from '@nestjs-modules/mailer';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -9,7 +10,7 @@ import { Cache } from 'cache-manager';
 import { FastifyReply } from 'fastify';
 
 import { UsersService } from '../users/users.service';
-import { AuthDto } from './dto/auth.dto';
+import { RegisterDto } from './dto/register.dto';
 import { JwtPayload, JwtPayloadExtra } from './jwt.strategy';
 
 @Injectable()
@@ -19,6 +20,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly mailerService: MailerService,
   ) {}
 
   public async verifyAuth(login: string, password: string) {
@@ -40,13 +42,47 @@ export class AuthService {
     return this.generateTokensPair({ uuid: user.uuid, login });
   }
 
-  public async register(data: AuthDto): Promise<any> {
+  public async register(data: RegisterDto): Promise<any> {
     if (await this.usersService.checkIfUserExists(data)) {
       throw new BadRequestException('User already exists');
     }
 
     data.password = await this.hashPassword(data.password);
     await this.usersService.createUser(data);
+  }
+
+  public async resetPassword(email: string) {
+    if (!(await this.usersService.checkIfUserExists({ email }))) {
+      throw new BadRequestException('User not found');
+    }
+
+    const resetToken = randomBytes(16).toString('hex');
+    await this.usersService.updateUser({ email }, { resetToken });
+
+    this.mailerService.sendMail({
+      to: email,
+      subject: 'Сброс пароля',
+      template: 'reset-password',
+      context: {
+        baseUrl: this.configService.get('FRONTEND_URL'),
+        projectName: this.configService.get('PROJECT_NAME', 'EasyCabinet'),
+        resetToken,
+      },
+    });
+  }
+
+  public async changePassword(resetToken: string, password: string) {
+    const user = await this.usersService.findUser({ resetToken });
+
+    if (!user) {
+      throw new BadRequestException('Invalid reset token');
+    }
+
+    password = await this.hashPassword(password);
+    await this.usersService.updateUser(
+      { resetToken },
+      { password, resetToken: null },
+    );
   }
 
   public async logout(refreshToken: string) {
