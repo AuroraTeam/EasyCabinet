@@ -17,23 +17,27 @@ CREATE DATABASE `НАЗВАНИЕ_БАЗЫ`;
 
 В этом файле будут храниться ваши настройки:
 
-- `DEV` - Настройки под разработку в коде
 - `HOST` - IP который слушает сервер
 - `PORT` - Порт на котором работает сервер
 - `FRONTEND_URL` - Адрес `frontend` части
 - `BACKEND_URL` - Внешний адрес `backend` части
+- `PROJECT_NAME` - Название проекта в письмах
 - `COOKIE_DOMAIN` - На какой домен будут созданы куки
 - `COOKIE_EXPIRES_IN` - Через сколько куки станут не действительные
-- `DB_HOST` - IP MySQL сервера
-- `DB_PORT` - Порт MySQL сервера
-- `DB_NAME` - База данных MySQL сервера
-- `DB_USER` - Имя пользователя MySQL сервера
-- `DB_PASS` - Пароль от пользователя MySQL сервера
+- `DATABASE_URL` - Адрес подключения к базе данных. Формат: `mysql://user:pass@host:port/database`
+- `USE_SENDMAIL` - Использовать sendmail вместо nodemailer
+- `SMTP_HOST` - Адрес SMTP сервера
+- `SMTP_PORT` - Порт SMTP сервера
+- `SMTP_SECURE` - Использовать SSL для SMTP сервера
+- `SMTP_USER` - Пользователь SMTP сервера
+- `SMTP_PASS` - Пароль от пользователя SMTP сервера
 
 # Запуск 
 
 Собираем проект и запускаем сервер.
 ```
+npx prisma migrate deploy # Создание таблиц в базе данных
+
 npm run build
 
 npm run start:prod

@@ -44,7 +44,7 @@ auth:
     hasJoinedUrl: http://ДОМЕН_BACKEND_СЕРВЕРА/aurora/hasJoined
     profileUrl: http://ДОМЕН_BACKEND_СЕРВЕРА/aurora/profile
     profilesUrl: http://ДОМЕН_BACKEND_СЕРВЕРА/aurora/profiles
-},
+}
 injector:
 {
     skinDomains: [
@@ -62,7 +62,7 @@ auth:
     hasJoinedUrl: http://localhost:8080/api/aurora/hasJoined
     profileUrl: http://localhost:8080/api/aurora/profile
     profilesUrl: http://localhost:8080/api/aurora/profiles
-},
+}
 injector:
 {
     skinDomains: [
