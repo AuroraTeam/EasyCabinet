@@ -29,9 +29,17 @@ export default function Profile() {
     const _profile = profile();
     if (!_profile) return;
 
-    _profile.skinUrl && skinViewer.loadSkin(_profile.skinUrl);
+    if (_profile.skinUrl) {
+      skinViewer.loadSkin(_profile.skinUrl, {
+        model: _profile.isAlex ? "slim" : "default",
+      });
+    }
+
     setSkinType(_profile.isAlex);
-    _profile.capeUrl && skinViewer.loadCape(_profile.capeUrl);
+
+    if (_profile.capeUrl) {
+      skinViewer.loadCape(_profile.capeUrl);
+    }
   });
 
   const onSubmit = (e) => {
@@ -71,10 +79,7 @@ export default function Profile() {
   };
 
   const changeCapeElytra = (e) => {
-    if (!skinViewer.playerObject.backEquipment) {
-      return;
-    }
-
+    if (!skinViewer.playerObject.backEquipment) return;
     skinViewer.playerObject.backEquipment = e.target.checked
       ? "elytra"
       : "cape";
