@@ -46,5 +46,7 @@ npm run start:prod
 Для разработки можно запустить сервер в соответственном режиме.
 
 ```
+npm run prisma migrate dev # Создания типов для prisma
+
 npm run start:debug
 ```
