@@ -35,18 +35,18 @@ CREATE DATABASE `НАЗВАНИЕ_БАЗЫ`;
 # Запуск 
 
 Собираем проект и запускаем сервер.
-```
+```sh
+npx prisma generate # Генерация типов для клиента призмы
 npx prisma migrate deploy # Создание таблиц в базе данных
 
 npm run build
-
 npm run start:prod
 ```
 
 Для разработки можно запустить сервер в соответственном режиме.
 
-```
+```sh
 npx prisma migrate dev # Создания типов для prisma
 
-npm run start:debug
+npm run start:dev
 ```
