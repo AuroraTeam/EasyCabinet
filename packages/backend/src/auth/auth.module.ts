@@ -1,8 +1,10 @@
+import { createKeyv } from '@keyv/redis';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { DiskStore } from 'cache-manager-fs-hash';
+import { CacheableMemory } from 'cacheable';
+import { Keyv } from 'keyv';
 
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
@@ -15,8 +17,19 @@ import { JwtStrategy } from './jwt.strategy';
   imports: [
     UsersModule,
     ConfigModule,
-    CacheModule.register({
-      store: new DiskStore({ path: 'sessions', subdirs: false }),
+    CacheModule.registerAsync({
+      isGlobal: true,
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => {
+        const stores = [new Keyv({ store: new CacheableMemory() })];
+
+        let redisUrl = configService.get<string>('REDIS_URL');
+        redisUrl = typeof redisUrl === 'string' ? redisUrl.trim() : undefined;
+        if (redisUrl) stores.push(createKeyv(redisUrl));
+
+        return { stores };
+      },
+      inject: [ConfigService],
     }),
     JwtModule.registerAsync({
       imports: [ConfigModule],

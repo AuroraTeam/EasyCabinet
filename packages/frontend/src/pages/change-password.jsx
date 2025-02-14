@@ -35,23 +35,23 @@ export default function ChangePassword() {
   };
 
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="bg-neutral-800 p-8 rounded-lg max-[350px]:w-full w-[350px]">
-        <h1 className="text-3xl mb-4 text-center">Смена пароля</h1>
-        <form className="flex flex-col gap-4" onSubmit={submit}>
+    <div class="flex items-center justify-center h-full">
+      <div class="bg-neutral-800 p-8 rounded-lg max-[350px]:w-full w-[350px]">
+        <h1 class="text-3xl mb-4 text-center">Смена пароля</h1>
+        <form class="flex flex-col gap-4" onSubmit={submit}>
           <input
             type="password"
             name="password"
             placeholder="Введите новый пароль"
-            className="border border-neutral-700 rounded-lg p-2 bg-neutral-800 text-white"
+            class="border border-neutral-700 rounded-lg p-2 bg-neutral-800 text-white"
           />
           <input
             type="password"
             name="password2"
             placeholder="Повторите пароль"
-            className="border border-neutral-700 rounded-lg p-2 bg-neutral-800 text-white"
+            class="border border-neutral-700 rounded-lg p-2 bg-neutral-800 text-white"
           />
-          <button className="bg-neutral-700 hover:bg-neutral-600 text-white rounded-lg p-2 auth-button">
+          <button class="bg-neutral-700 hover:bg-neutral-600 text-white rounded-lg p-2 auth-button">
             Сохранить
           </button>
         </form>

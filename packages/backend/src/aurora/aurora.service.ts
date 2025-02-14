@@ -70,7 +70,7 @@ export class AuroraService {
 
   public async profiles(body: ProfilesDto) {
     const users = await this.usersService.findUsers({
-      login: {in: body.usernames},
+      login: { in: body.usernames },
     });
 
     return users.map((user) => ({

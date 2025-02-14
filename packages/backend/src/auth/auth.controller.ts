@@ -52,7 +52,7 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  logout(
+  async logout(
     @Req() req: FastifyRequest,
     @Res({ passthrough: true }) response: FastifyReply,
   ) {
@@ -69,7 +69,7 @@ export class AuthController {
       return;
     }
 
-    this.authService.logout(parsedRefreshToken.value);
+    await this.authService.logout(parsedRefreshToken.value);
   }
 
   @Post('refresh')

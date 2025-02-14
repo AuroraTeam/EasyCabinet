@@ -31,18 +31,18 @@ async function bootstrap() {
   );
 
   const configService = app.get(ConfigService);
-  const host = configService.get('HOST');
-  const port = configService.get('PORT');
-  const secret = configService.get('COOKIE_SECRET');
-  const frontend = configService.get('FRONTEND_URL');
+  const host = configService.get<string>('HOST');
+  const port = configService.get<string>('PORT');
+  const secret = configService.get<string>('COOKIE_SECRET');
+  const frontend = configService.get<string>('FRONTEND_URL');
 
   app.enableCors({
     origin: [frontend],
     credentials: true,
   });
 
-  await app.register(<any>fastifyMultipart);
-  await app.register(<any>fastifyCookie, { secret });
+  await app.register(fastifyMultipart);
+  await app.register(fastifyCookie, { secret });
   await app.listen(port, host);
 }
-bootstrap();
+void bootstrap();

@@ -10,22 +10,22 @@ export function Header() {
   };
 
   return (
-    <header className="flex items-center justify-between py-3">
-      <a href="/" className="flex items-center gap-4">
-        <img src="/logo.png" className="w-10" alt="Logo" />
-        <span className="hidden sm:inline text-xl font-extralight">
+    <header class="flex items-center justify-between py-3">
+      <a href="/" class="flex items-center gap-4">
+        <img src="/logo.png" class="w-10" alt="Logo" />
+        <span class="hidden sm:inline text-xl font-extralight">
           Easy Cabinet
         </span>
       </a>
       {isAuthed() ? (
-        <nav className="flex items-center gap-4 p-4">
+        <nav class="flex items-center gap-4 p-4">
           <a href="/profile">Профиль</a>
           <a href="#" onClick={doLogout}>
             Выход
           </a>
         </nav>
       ) : (
-        <nav className="flex items-center gap-4 p-4">
+        <nav class="flex items-center gap-4 p-4">
           <a href="/login">Вход</a>
           <a href="/register">Регистрация</a>
         </nav>

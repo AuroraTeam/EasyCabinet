@@ -1,6 +1,7 @@
 import { join } from 'path';
 
 import { MailerModule } from '@nestjs-modules/mailer';
+import { TransportType } from '@nestjs-modules/mailer/dist/interfaces/mailer-options.interface';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ReactAdapter } from '@webtre/nestjs-mailer-react-adapter';
@@ -19,27 +20,28 @@ import { AuthModule } from './auth/auth.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
         const useSendmail =
-          configService.get('USE_SENDMAIL', 'false') == 'true';
+          configService.get<string>('USE_SENDMAIL', 'false') == 'true';
 
-        const user = configService.get('SMTP_USER');
+        const user = configService.get<string>('SMTP_USER');
         if (!user) {
           throw new Error('SMTP_USER are required');
         }
 
-        let transport = null;
+        let transport: TransportType;
         if (useSendmail) {
           transport = { sendmail: true };
         } else {
-          const host = configService.get('SMTP_HOST');
-          const port = +configService.get('SMTP_PORT', 587);
+          const host = configService.get<string>('SMTP_HOST');
+          const port = +configService.get<string>('SMTP_PORT', '587');
           const secure =
-            configService.get('SMTP_SECURE', port === 465) == 'true';
+            configService.get<string>('SMTP_SECURE', String(port === 465)) ==
+            'true';
 
           if (!host) {
             throw new Error('SMTP_HOST are required');
           }
 
-          const pass = configService.get('SMTP_PASS');
+          const pass = configService.get<string>('SMTP_PASS');
           if (!pass) {
             throw new Error('SMTP_PASS are required');
           }
@@ -57,7 +59,7 @@ import { AuthModule } from './auth/auth.module';
         };
       },
       inject: [ConfigService],
-    }),
+    }) as never,
   ],
   controllers: [AppController],
 })

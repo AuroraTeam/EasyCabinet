@@ -44,7 +44,7 @@ export class AuroraController {
   // @Post('refresh')
   // refresh() {}
 
-  returnResult(result: any) {
+  returnResult(result: unknown) {
     return { success: true, result };
   }
 }

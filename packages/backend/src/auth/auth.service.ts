@@ -42,7 +42,7 @@ export class AuthService {
     return this.generateTokensPair({ uuid: user.uuid, login });
   }
 
-  public async register(data: RegisterDto): Promise<any> {
+  public async register(data: RegisterDto) {
     if (await this.usersService.checkIfUserExists(data)) {
       throw new BadRequestException('User already exists');
     }
@@ -59,13 +59,16 @@ export class AuthService {
     const resetToken = randomBytes(16).toString('hex');
     await this.usersService.updateUser({ email }, { resetToken });
 
-    this.mailerService.sendMail({
+    await this.mailerService.sendMail({
       to: email,
       subject: 'Сброс пароля',
       template: 'reset-password',
       context: {
-        baseUrl: this.configService.get('FRONTEND_URL'),
-        projectName: this.configService.get('PROJECT_NAME', 'EasyCabinet'),
+        baseUrl: this.configService.get<string>('FRONTEND_URL'),
+        projectName: this.configService.get<string>(
+          'PROJECT_NAME',
+          'EasyCabinet',
+        ),
         resetToken,
       },
     });
@@ -89,7 +92,7 @@ export class AuthService {
     // В данной функции нам нет смысла возвращать пользователю ошибки
     try {
       await this.checkAndRemoveToken(refreshToken);
-    } catch (error) {
+    } catch {
       // ignore
     }
   }
@@ -164,7 +167,7 @@ export class AuthService {
       secure: this.configService.get('COOKIE_SECURE', 'false') === 'true',
       domain: this.configService.get('COOKIE_DOMAIN', 'localhost'),
       path: '/auth',
-      maxAge: this.configService.get('COOKIE_EXPIRES_IN', 2592000), // 30 days
+      maxAge: +this.configService.get('COOKIE_EXPIRES_IN', 2592000), // 30 days
     });
   }
 

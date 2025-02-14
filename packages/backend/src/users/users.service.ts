@@ -5,12 +5,12 @@ import { join } from 'path';
 import { MemoryStorageFile } from '@blazity/nest-file-fastify';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { Prisma, User } from '@prisma/client';
 import sharp from 'sharp';
 
 import { JwtPayload } from '../auth/jwt.strategy';
 import { ProfileDto } from './dto/profile.dto';
 import { PrismaService } from './prisma.service';
-import { User, Prisma } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -24,35 +24,35 @@ export class UsersService {
       where,
     });
   }
-  
+
   public async findUsers(where: Prisma.UserWhereInput) {
     return this.prisma.user.findMany({
       where,
     });
   }
-  
+
   public async checkIfUserExists({ email }: Pick<User, 'email'>) {
     const count = await this.prisma.user.count({
       where: { email },
     });
     return count > 0;
   }
-  
+
   public async createUser(user: Prisma.UserCreateInput) {
     return this.prisma.user.create({
       data: user,
     });
   }
-  
+
   public async updateUser(
     criteria: Prisma.UserWhereUniqueInput,
-    user: Prisma.UserUpdateInput
+    user: Prisma.UserUpdateInput,
   ) {
     return this.prisma.user.update({
       where: criteria,
       data: user,
     });
-  }  
+  }
 
   public async getProfile({ uuid }: JwtPayload) {
     return this.getSkinData(await this.findUser({ uuid }));

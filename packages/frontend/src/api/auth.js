@@ -80,14 +80,18 @@ export async function refresh() {
     });
     setBearerToken(data.accessToken);
     setIsAuthed(true);
-  } catch (error) {}
+  } catch {
+    // do nothing
+  }
   setIsLoaded(true);
 }
 
 export async function logout() {
   try {
     await axios.post("auth/logout", null, { withCredentials: true });
-  } catch (error) {}
+  } catch {
+    // do nothing
+  }
   setIsAuthed(false);
   setBearerToken(null);
 }
