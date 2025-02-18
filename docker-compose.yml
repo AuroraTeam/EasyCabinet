@@ -1,7 +1,6 @@
 name: easy-cabinet
 
 services:
-
   frontend:
     container_name: easycabinet-frontend
     ports:
@@ -11,7 +10,9 @@ services:
       dockerfile: Dockerfile
     networks:
       - aurora-network
-    restart: always
+    depends_on:
+      - backend
+    restart: unless-stopped
 
   backend:
     container_name: easycabinet-backend
@@ -22,7 +23,7 @@ services:
       - aurora-network
     depends_on:
       - mysql
-    restart: always
+    restart: unless-stopped
 
   mysql:
     image: mysql:lts
@@ -34,7 +35,7 @@ services:
       - MYSQL_DATABASE=mine
       - MYSQL_USER=mine
       - MYSQL_PASSWORD=mine
-    #restart: always
+    restart: unless-stopped
 
 networks:
   aurora-network:

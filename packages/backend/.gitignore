@@ -1,7 +1,7 @@
 # project files
 /dist
 /node_modules
-/sessions
+/cache
 
 # Logs
 logs

@@ -1,12 +1,7 @@
-import { createHash } from 'crypto';
-import { mkdir, writeFile } from 'fs/promises';
-import { join } from 'path';
-
 import { MemoryStorageFile } from '@blazity/nest-file-fastify';
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
-import sharp from 'sharp';
+import { AssetsService } from 'src/assets/assets.service';
 
 import { JwtPayload } from '../auth/jwt.strategy';
 import { ProfileDto } from './dto/profile.dto';
@@ -16,7 +11,7 @@ import { PrismaService } from './prisma.service';
 export class UsersService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly configService: ConfigService,
+    private readonly assetsService: AssetsService,
   ) {}
 
   public async findUser(where: Prisma.UserWhereUniqueInput) {
@@ -61,8 +56,8 @@ export class UsersService {
   public getSkinData({ isAlex, skinHash, capeHash }: User) {
     return {
       isAlex,
-      skinUrl: this.formatUrl('skin', skinHash),
-      capeUrl: this.formatUrl('cape', capeHash),
+      skinUrl: this.assetsService.formatUrl('skin', skinHash),
+      capeUrl: this.assetsService.formatUrl('cape', capeHash),
     };
   }
 
@@ -72,8 +67,8 @@ export class UsersService {
     skin?: MemoryStorageFile[],
     cape?: MemoryStorageFile[],
   ) {
-    const skinHash = await this.uploadImage('skin', skin);
-    const capeHash = await this.uploadImage('cape', cape);
+    const skinHash = await this.assetsService.uploadImage('skin', skin);
+    const capeHash = await this.assetsService.uploadImage('cape', cape);
 
     const userData: Partial<User> = {
       isAlex: profile.isAlex,
@@ -85,85 +80,5 @@ export class UsersService {
     await this.updateUser({ login: user.login }, userData);
 
     return true;
-  }
-
-  private formatUrl(type: 'skin' | 'cape', hash: string) {
-    if (!hash) return;
-
-    return new URL(
-      `/uploads/${type}/${hash.slice(0, 2)}/${hash}.png`,
-      this.configService.get<string>('BACKEND_URL'),
-    );
-  }
-
-  private async uploadImage(
-    type: 'skin' | 'cape',
-    images: MemoryStorageFile[],
-  ) {
-    if (!images || images[0].size === 0) return;
-
-    if (type === 'skin') {
-      await this.verifySkin(images[0]);
-    } else {
-      await this.verifyCape(images[0]);
-    }
-
-    const imageHash = this.generateHash(images[0].buffer);
-
-    const imageDir = join(
-      __dirname,
-      '..',
-      '..',
-      'uploads',
-      type,
-      imageHash.slice(0, 2),
-    );
-
-    await mkdir(imageDir, { recursive: true });
-    await writeFile(join(imageDir, `${imageHash}.png`), images[0].buffer);
-
-    return imageHash;
-  }
-
-  private verifySkin(skin: MemoryStorageFile) {
-    return this.verifyImage(skin, 'skin', [
-      { width: 64, height: 32 },
-      { width: 64, height: 64 },
-    ]);
-  }
-
-  private verifyCape(cape: MemoryStorageFile) {
-    return this.verifyImage(cape, 'cape', [{ width: 64, height: 32 }]);
-  }
-
-  private async verifyImage(
-    image: MemoryStorageFile,
-    type: 'skin' | 'cape',
-    availableSizes: { width: number; height: number }[],
-  ) {
-    if (image.mimetype !== 'image/png') {
-      throw new BadRequestException(`Invalid ${type} format`);
-    }
-
-    const file = sharp(image.buffer);
-    const metadata = await file.metadata();
-
-    // Возможно не обязательно, но оставлю на всякий случай
-    if (metadata.format !== 'png') {
-      throw new BadRequestException(`Invalid ${type} format`);
-    }
-
-    if (
-      !availableSizes.some(
-        (size) =>
-          metadata.width === size.width && metadata.height === size.height,
-      )
-    ) {
-      throw new BadRequestException(`Invalid ${type} size`);
-    }
-  }
-
-  private generateHash(buffer: Buffer) {
-    return createHash('sha256').update(buffer).digest('hex');
   }
 }

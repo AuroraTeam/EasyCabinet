@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+
 import { createKeyv } from '@keyv/redis';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
@@ -5,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { CacheableMemory } from 'cacheable';
 import { Keyv } from 'keyv';
+import KeyvFile from 'keyv-file';
 
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
@@ -23,9 +26,18 @@ import { JwtStrategy } from './jwt.strategy';
       useFactory: (configService: ConfigService) => {
         const stores = [new Keyv({ store: new CacheableMemory() })];
 
-        let redisUrl = configService.get<string>('REDIS_URL');
-        redisUrl = typeof redisUrl === 'string' ? redisUrl.trim() : undefined;
-        if (redisUrl) stores.push(createKeyv(redisUrl));
+        const redisUrl = configService.get<string>('REDIS_URL');
+        if (redisUrl) {
+          stores.push(createKeyv(redisUrl));
+        } else {
+          stores.push(
+            new Keyv({
+              store: new KeyvFile({
+                filename: join(__dirname, '../../cache/auth.json'),
+              }),
+            }),
+          );
+        }
 
         return { stores };
       },

@@ -1,11 +1,10 @@
-FROM node:20-alpine AS base
+FROM node:22-alpine AS build
 
-FROM base AS build
 WORKDIR /build
 COPY . .
 ENV VITE_API_URL="/api/"
 RUN npm i &&\
-    npm run build
+  npm run build
 
 FROM nginx:alpine AS runner
 COPY --from=build /build/dist /usr/share/nginx/html

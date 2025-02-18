@@ -21,6 +21,7 @@
     "emails:dev": "email dev --dir src/emails"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.750.0",
     "@blazity/nest-file-fastify": "^1.0.0",
     "@fastify/cookie": "^11.0.2",
     "@fastify/multipart": "^9.0.3",
@@ -46,6 +47,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "keyv": "^5.2.3",
+    "keyv-file": "^5.1.1",
     "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

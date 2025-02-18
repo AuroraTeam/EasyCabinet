@@ -7,9 +7,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ReactAdapter } from '@webtre/nestjs-mailer-react-adapter';
 
 import { AppController } from './app.controller';
+import { AssetsModule } from './assets/assets.module';
 import { AuroraModule } from './aurora/aurora.module';
 import { IgnoreCorsMiddleware } from './aurora/cors.middleware';
 import { AuthModule } from './auth/auth.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -60,6 +62,8 @@ import { AuthModule } from './auth/auth.module';
       },
       inject: [ConfigService],
     }) as never,
+    FilesModule,
+    AssetsModule,
   ],
   controllers: [AppController],
 })
