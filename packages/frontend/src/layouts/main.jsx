@@ -4,7 +4,7 @@ export default function Main(props) {
   return (
     <>
       <Header />
-      <main class="h-[calc(100vh-(56px+1.5rem))]">{props.children}</main>
+      <main class="grid min-h-[calc(100vh-(56px+1.5rem))]">{props.children}</main>
     </>
   );
 }
