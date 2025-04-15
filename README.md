@@ -5,24 +5,6 @@
 
 ## Установка
 
-### Автоматическая установка
-
-Скачиваем репозиторий с помощью команды:
-```
-git clone https://github.com/AuroraTeam/EasyCabinet.git
-```
-
-После собираем Docker образ и запускаем его с помощью команды:
-```
-docker-compose up -d
-```
-
-После этого можно получить доступ к личному кабинету на адресе `http://localhost:8080`
-
-Для изменения адреса сервера используйте файл [`.env`](https://github.com/AuroraTeam/EasyCabinet/blob/master/.env) в корне проекта.
-
-### Ручная установка
-
 Первым делом установите нужные зависимости.
 
 ```
@@ -49,24 +31,6 @@ injector:
 {
     skinDomains: [
         "ДОМЕН_BACKEND_СЕРВЕРА"
-    ]
-}
-```
-Для автоматической установки конфигурация LaunchServer немного отличается:
-```hjson
-auth:
-{
-    type: json
-    authUrl: http://localhost:8080/api/aurora/auth
-    joinUrl: http://localhost:8080/api/aurora/join
-    hasJoinedUrl: http://localhost:8080/api/aurora/hasJoined
-    profileUrl: http://localhost:8080/api/aurora/profile
-    profilesUrl: http://localhost:8080/api/aurora/profiles
-}
-injector:
-{
-    skinDomains: [
-        "localhost"
     ]
 }
 ```
