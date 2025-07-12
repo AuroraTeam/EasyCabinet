@@ -39,6 +39,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [frontend],
     credentials: true,
+    methods: ['GET', 'POST', 'PUT'],
   });
 
   await app.register(fastifyMultipart);
