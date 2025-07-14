@@ -86,7 +86,7 @@ export default function Profile() {
   };
 
   return (
-    <div class="flex flex-col md:flex-row items-center md:items-start gap-6 mt-6 p-6 bg-neutral-800 rounded-sm profile">
+    <div class="flex flex-col md:flex-row items-center md:items-start gap-6 mt-6 p-6 bg-neutral-800 rounded-sm">
       <div>
         <canvas ref={skinCanvas} class="rounded-sm bg-neutral-900/20" />
         <div class="flex items-center justify-center">
