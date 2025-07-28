@@ -32,7 +32,7 @@ export const ResetPassword = ({ projectName, baseUrl, resetToken }: Props) => {
               style={{ display: 'inline-block', margin: '1rem auto 0' }}
             >
               <Img
-                src={`${baseUrl}/logo.png`}
+                src={`${baseUrl}/favicons/icon.svg`}
                 width="64"
                 height="64"
                 alt="Logo"
@@ -64,7 +64,7 @@ export const ResetPassword = ({ projectName, baseUrl, resetToken }: Props) => {
 };
 
 ResetPassword.PreviewProps = {
-  baseUrl: 'https://mc.jocat.ru/',
+  baseUrl: 'https://aurora-launcher.ru/',
   projectName: 'Example',
   resetToken: '3b6d99cce4dfc6f1a9e83457ab9aa6c4',
 } as Props;

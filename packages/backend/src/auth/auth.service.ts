@@ -1,6 +1,5 @@
 import { randomBytes, randomUUID } from 'crypto';
 
-import { MailerService } from '@nestjs-modules/mailer';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -9,6 +8,7 @@ import { compare, hash } from 'bcrypt';
 import { Cache } from 'cache-manager';
 import { FastifyReply } from 'fastify';
 
+import { EmailsService } from '../emails/emails.service';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { JwtPayload, JwtPayloadExtra } from './jwt.strategy';
@@ -20,7 +20,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    private readonly mailerService: MailerService,
+    private readonly emailsService: EmailsService,
   ) {}
 
   public async verifyAuth(login: string, password: string) {
@@ -59,19 +59,7 @@ export class AuthService {
     const resetToken = randomBytes(16).toString('hex');
     await this.usersService.updateUser({ email }, { resetToken });
 
-    await this.mailerService.sendMail({
-      to: email,
-      subject: 'Сброс пароля',
-      template: 'reset-password',
-      context: {
-        baseUrl: this.configService.get<string>('FRONTEND_URL'),
-        projectName: this.configService.get<string>(
-          'PROJECT_NAME',
-          'EasyCabinet',
-        ),
-        resetToken,
-      },
-    });
+    await this.emailsService.sendResetPasswordEmail(email, resetToken);
   }
 
   public async changePassword(resetToken: string, password: string) {
