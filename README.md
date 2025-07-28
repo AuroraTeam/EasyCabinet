@@ -8,7 +8,7 @@
 Первым делом установите нужные зависимости.
 
 ```
-npm i
+pnpm i
 ```
 
 Далее пройдите отдельно настройку и установку [frontend](https://github.com/AuroraTeam/EasyCabinet/tree/master/packages/frontend) и [backend](https://github.com/AuroraTeam/EasyCabinet/tree/master/packages/backend).

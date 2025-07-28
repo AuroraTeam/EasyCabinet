@@ -4,16 +4,17 @@
 
 - [MySQL](https://www.mysql.com/)
 
-### Настройка MySQL 
+### Настройка MySQL
 
 Нужно создать базу данных:
+
 ```sql
 CREATE DATABASE `НАЗВАНИЕ_БАЗЫ`;
 ```
 
 # Настройка
 
-Переименуйте файл [.env.example](https://github.com/AuroraTeam/EasyCabinet/blob/master/packages/backend/.env.example) в `.env`.  
+Переименуйте файл [.env.example](https://github.com/AuroraTeam/EasyCabinet/blob/master/packages/backend/.env.example) в `.env`.
 
 В этом файле будут храниться ваши настройки:
 
@@ -37,7 +38,8 @@ CREATE DATABASE `НАЗВАНИЕ_БАЗЫ`;
 Если вы хотите использовать более быстрый способ хранения кеша то установите [Redis](https://docs.keydb.dev/docs/download/) и заполните переменной `REDIS_URL`.
 
 Так же для удобства вы может использовать внешние хранилище для файлов по типу S3.\
-Для этого можно использовать [MinIO](https://min.io/download#/linux) или любые облочные сервисы совместимы с S3 и заполните переменные: 
+Для этого можно использовать [MinIO](https://min.io/download#/linux) или любые облочные сервисы совместимы с S3 и заполните переменные:
+
 - `STORAGE_FORMAT` - Нужно изменить на `s3`
 - `S3_ACCESS_KEY_ID` - Логин от S3
 - `S3_SECRET_ACCESS_KEY`- Пароль от S3
@@ -46,21 +48,22 @@ CREATE DATABASE `НАЗВАНИЕ_БАЗЫ`;
 - `S3_BUCKET` - Сам bucket в S3
 - `S3_PUBLIC_URL` - Публичный URL до S3
 
-# Запуск 
+# Запуск
 
 Собираем проект и запускаем сервер.
-```sh
-npx prisma generate # Генерация типов для клиента призмы
-npx prisma migrate deploy # Создание таблиц в базе данных
 
-npm run build
-npm run start:prod
+```sh
+pnpx prisma generate # Генерация типов для клиента призмы
+pnpx prisma migrate deploy # Создание таблиц в базе данных
+
+pnpm run build
+pnpm run start:prod
 ```
 
 Для разработки можно запустить сервер в соответственном режиме.
 
 ```sh
-npx prisma migrate dev # Создания типов для prisma
+pnpx prisma migrate dev # Создания типов для prisma
 
-npm run start:dev
+pnpm run start:dev
 ```
